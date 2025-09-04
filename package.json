@@ -6,7 +6,12 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed": "node -r dotenv/config scripts/seed.js",
+    "seed:dev": "cross-env SEED_ENV=development SEED_FORCE=true node -r dotenv/config scripts/seed.js",
+    "seed:test": "cross-env SEED_ENV=test SEED_FORCE=true node -r dotenv/config scripts/seed.js",
+    "seed:staging": "cross-env SEED_ENV=staging node -r dotenv/config scripts/seed.js",
+    "seed:prod": "cross-env SEED_ENV=production node -r dotenv/config scripts/seed.js"
   },
   "dependencies": {
     "mysql2": "^3.14.4",

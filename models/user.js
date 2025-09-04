@@ -19,8 +19,8 @@ return values;
 // Initiate hot reloads function //
 export const hotReloads = () => {
  // Create it for hot reloads //
-if (sequelize.User.models) {
-    return sequelize.User.models
+if (sequelize.models.User) {
+    return sequelize.models.User;
 }
 }
 
