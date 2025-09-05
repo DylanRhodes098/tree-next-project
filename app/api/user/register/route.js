@@ -12,8 +12,8 @@ import { User } from "@/models/user";
 // Create post route to register user //
 export async function POST(req) {
     try{
-const { email, password } = await req.json();
-if (!email || !password ) {
+const { full_name, email, password } = await req.json();
+if (!full_name || !email || !password ) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
 }
 

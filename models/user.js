@@ -1,5 +1,5 @@
 // Import libararies //
-import {sequelize} from "@/lib/db/";
+import {sequelize} from "../lib/db/";
 
 import {Model, DataTypes} from "seqeulize";
 
@@ -82,6 +82,6 @@ User.init (
             }
         )
 
-        return User;
+        export default User;
 
 

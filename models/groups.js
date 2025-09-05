@@ -1,5 +1,5 @@
 // Import libararies //
-import {sequelize} from "@/lib/db/";
+import {sequelize} from "../lib/db/";
 
 import {Model, DataTypes} from "seqeulize";
 
@@ -70,4 +70,4 @@ groups.init (
             }
         )
 
-        return groups;
+        export default groups;

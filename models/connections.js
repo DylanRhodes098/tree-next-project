@@ -1,5 +1,5 @@
 // Import libararies //
-import {sequelize} from "@/lib/db/";
+import {sequelize} from "../lib/db/";
 
 import {Model, DataTypes} from "seqeulize";
 
@@ -41,4 +41,4 @@ export const hotReloads = () => {
           }
     )
 
-    return connections;
+    export default connections;

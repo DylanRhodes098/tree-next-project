@@ -12,12 +12,12 @@ import { User } from "@/models/user";
 // Create post route to login user //
 export async function POST(req) {
     try{
-        const { email, password } = await req.json();
-        if (!email || !password ) {
+        const { full_name, email, password } = await req.json();
+        if (!full_name || !email || !password ) {
             return NextResponse.json({ error: "Missing fields" }, { status: 400 });
         }
 
-const user = await User.findOne({
+const user = await User.findOne({ full_name, 
     where: { email: String(email).trim().toLowerCase() },
   });
 

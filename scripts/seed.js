@@ -1,11 +1,12 @@
 // Import libraries //
 import path from "node:path";
 import { promises as fs } from "node:fs";
+import 'dotenv/config';
 
 // Import files //
-import sequelize from "@/lib/db";               
-import User from "@/models/user";               
-import Post from "@/models/post";               
+import sequelize from "../lib/db.js";               
+import User from "../models/user.js";               
+import groups from "../models/groups.js";               
 
 // - - - Configuration - - - //
 
@@ -22,7 +23,7 @@ const DATA_BASE = path.join(process.cwd(), "seed", "data");
 
 // Define seed data files //
 const FILES = {
-  users: "users.json",
+  user: "user.json",
   groups: "groups.json",
   profile: "profile.json"
 };
@@ -79,7 +80,7 @@ async function seed() {
 
   const groupsData = await loadJSON(FILES.groups);
   if (groupsData && postsData.length) {
-    await Post.bulkCreate(groupsData, { validate: true, individualHooks: true });
+    await groups.bulkCreate(groupsData, { validate: true, individualHooks: true });
     console.log(`✅ Posts inserted: ${groupsData.length}`);
   } else {
     console.log("➡️  Skipping groups: no data file found");
@@ -87,8 +88,8 @@ async function seed() {
 
 const profileData = await loadJSON(FILES.profile);
   if (profileData && postsData.length) {
-    await Post.bulkCreate(profileData, { validate: true, individualHooks: true });
-    console.log(`✅ profile inserted: ${groupsData.length}`);
+    await profile.bulkCreate(profileData, { validate: true, individualHooks: true });
+    console.log(`✅ profile inserted: ${profileData.length}`);
   } else {
     console.log("➡️  Skipping profile: no data file found");
   }

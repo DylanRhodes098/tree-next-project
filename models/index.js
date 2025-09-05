@@ -1,6 +1,6 @@
 // Import libararies //
 
-import sequelize from "@/lib/db";
+import sequelize from "../lib/db";
 import { DataTypes } from "sequelize";
 
 // Import model files //

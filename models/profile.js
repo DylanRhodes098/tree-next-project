@@ -1,5 +1,5 @@
 // Import libararies //
-import {sequelize} from "@/lib/db/";
+import {sequelize} from "../lib/db/";
 
 import {Model, DataTypes} from "seqeulize";
 
@@ -102,4 +102,4 @@ profile.init (
           }
         );
     
-return profile;
+export default profile;
