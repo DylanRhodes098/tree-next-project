@@ -1,7 +1,7 @@
 // Import libararies //
-import {sequelize} from "../lib/db/";
+import sequelize from "../lib/db.js";
 
-import {Model, DataTypes} from "seqeulize";
+import {Model, DataTypes} from "sequelize";
 
 export class profile extends Model {
 toJSON() {

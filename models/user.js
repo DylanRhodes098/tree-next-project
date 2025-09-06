@@ -1,9 +1,9 @@
 // Import libararies //
-import {sequelize} from "../lib/db/";
+import sequelize from "../lib/db.js";
 
-import {Model, DataTypes} from "seqeulize";
+import {Model, DataTypes} from "sequelize";
 
-import bcrypt from "bcrypytjs";
+import bcrypt from "bcryptjs";
 
 // Define User container for db //
 export class User extends Model {
@@ -33,7 +33,7 @@ User.init (
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4,
           },
-          name: {
+          full_name: {
             type: DataTypes.STRING,
             allowNull: false,
         
@@ -76,7 +76,7 @@ User.init (
             },
             sequelize,
                 modelName: "User",
-                tableName: "User",
+                tableName: "user",
                 underscore: true,
                 timestamps: true,
             }

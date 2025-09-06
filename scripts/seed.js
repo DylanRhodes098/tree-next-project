@@ -6,7 +6,7 @@ import 'dotenv/config';
 // Import files //
 import sequelize from "../lib/db.js";               
 import User from "../models/user.js";               
-import groups from "../models/groups.js";               
+import Groups from "../models/groups.js";               
 
 // - - - Configuration - - - //
 
@@ -69,7 +69,7 @@ async function seed() {
 
   await sequelize.sync({ force: FORCE });
 
-  const userData = await loadJSON(FILES.users);
+  const userData = await loadJSON(FILES.user);
   if (userData && userData.length) {
   
     await User.bulkCreate(userData, { validate: true, individualHooks: true });
@@ -80,7 +80,7 @@ async function seed() {
 
   const groupsData = await loadJSON(FILES.groups);
   if (groupsData && postsData.length) {
-    await groups.bulkCreate(groupsData, { validate: true, individualHooks: true });
+    await Groups.bulkCreate(groupsData, { validate: true, individualHooks: true });
     console.log(`✅ Posts inserted: ${groupsData.length}`);
   } else {
     console.log("➡️  Skipping groups: no data file found");
