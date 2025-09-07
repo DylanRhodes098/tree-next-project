@@ -9,6 +9,22 @@ import { signToken } from "@/lib/auth";
 
 import { User } from "@/models/user";
 
+// Create get route to retrieve all users //
+export async function GET() {
+    try{
+const users = await User.findAll();
+if (!users) {
+    return NextResponse.json({ error: "can not find users" }, { status: 400 });
+}
+
+return NextResponse.json(users);
+
+    } catch (err) {
+        return NextResponse.json({ error: "failed retrieving user" }, { status: 400 });
+    }
+}
+
+
 // Create post route to register user //
 export async function POST(req) {
     try{

@@ -7,6 +7,8 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
+    "//": "complex seed.",
+    "seed:simple": "node scripts/seed.simple.js",
     "seed": "node -r dotenv/config scripts/seed.js",
     "seed:dev": "cross-env SEED_ENV=development SEED_FORCE=true node -r dotenv/config scripts/seed.js",
     "seed:test": "cross-env SEED_ENV=test SEED_FORCE=true node -r dotenv/config scripts/seed.js",
