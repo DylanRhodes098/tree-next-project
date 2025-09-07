@@ -3,7 +3,7 @@ import sequelize from "../lib/db.js";
 
 import {Model, DataTypes} from "sequelize";
 
-export class profile extends Model {
+export class Profile extends Model {
 toJSON() {
 const values = {...this.get}
 delete values.password
@@ -17,7 +17,7 @@ if (sequelize.models.profile) {
 }
 }
 
-profile.init (
+Profile.init (
     {
         id: {
             type: DataTypes.UUID,
@@ -95,11 +95,11 @@ profile.init (
         },
           {
             sequelize,
-            modelName: "profile",
+            modelName: "Profile",
             tableName: "profile",
             timestamps: true,
             underscored: true,
           }
         );
     
-export default profile;
+export default Profile;
