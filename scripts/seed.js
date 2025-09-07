@@ -6,7 +6,7 @@ import 'dotenv/config';
 // Import files //
 import sequelize from "../lib/db.js";               
 import User from "../models/user.js";               
-import Groups from "../models/groups.js";               
+import Groups from "../models/groups.js";          
 import Profile from "../models/profile.js";         
 
 // - - - Configuration - - - //
