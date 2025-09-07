@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import sequelize from "../../../lib/db.js";
 
-export const runtime = "nodejs";
+export const runtime = 'nodejs';
 
 export async function GET() {
   return NextResponse.json({
