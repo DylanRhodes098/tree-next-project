@@ -7,20 +7,23 @@ import { signToken } from "@/lib/auth";
 
 // Import model files //
 
-import { profile } from "@/model/groups.js";
+import { Profile } from "../../../models/profile";
+
+// Define node runtime //
+export const runtime = 'nodejs';
 
 // Create a get route to retrieve all profiles //
 export async function GET(req) {
     try {
-    const profiles = await profile.findAll({
-        include: {
-            model: groups,
-            as: "profile",
-        }
-    });
+    const profiles = await Profile.findAll();
 
     return NextResponse.json(profiles, {status:200});
     } catch (err) {
+        console.error("GET /api/groups failed:", err);
+        const msg =
+          process.env.NODE_ENV === "development"
+            ? err.parent?.sqlMessage || err.message
+            : "Error retrieving groups";
         return NextResponse.json({ error: "Error retrieving profiles" }, { status: 500 });
     }
 }
@@ -35,7 +38,7 @@ export async function POST(req) {
         return NextResponse.json({ error: "Missing fields" }, { status: 400 });
       }
          
-    const createProfile = await groups.create({
+    const createProfile = await Profile.create({
         full_name, address, mobile_number, email, date_of_birth, linkedin, whatsapp, instagram, snapchat, tiktok, interests, notes })
         
         return NextResponse.json(createProfile, { status: 200 });

@@ -55,8 +55,10 @@ Groups.init (
   },
   {
     sequelize,
-    tableName: "groups",   // actual DB table
-    underscored: true,     // created_at / updated_at auto (snake_case)
+    modelName: "Groups",
+    tableName: "groups",
+    freezeTableName: true,   
+    underscored: true,     
     timestamps: true, 
             }
         )

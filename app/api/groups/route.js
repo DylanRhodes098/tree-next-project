@@ -7,17 +7,15 @@ import { signToken } from "@/lib/auth";
 
 // Import model files //
 
-import { groups } from "@/model/groups.js";
+import {Groups} from "../../../models/groups";
+
+// Define node runtime //
+export const runtime = 'nodejs';
 
 // Create a get route to retrieve all groups //
 export async function GET(req) {
     try {
-    const groups = await groups.findAll({
-        include: {
-            model: User,
-            as: "groups",
-        }
-    });
+    const groups = await Groups.findAll();
 
     return NextResponse.json(groups, {status:200});
     } catch (err) {
@@ -35,7 +33,7 @@ export async function POST(req) {
         return NextResponse.json({ error: "Missing fields" }, { status: 400 });
       }
          
-    const createGroup = await groups.create({
+    const createGroup = await Groups.create({
         name, linkedin, whatsapp, instagram, snapchat, tiktok, notes })
         
         return NextResponse.json(createGroup, { status: 200 });
