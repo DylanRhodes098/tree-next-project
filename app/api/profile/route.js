@@ -1,13 +1,13 @@
 // Import libraries //
-import {sequelize} from '@/lib/db.js'
+
 
 // Import tools //
 import { NextResponse } from "next/server";
-import { signToken } from "@/lib/auth";
+
 
 // Import model files //
 
-import { Profile } from "../../../models/profile";
+import Profile from "../../../models/profile";
 
 // Define node runtime //
 export const runtime = 'nodejs';

@@ -2,12 +2,14 @@
 
 // Import tools //
 import { NextResponse } from "next/server";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { signToken } from "@/lib/auth";
 
 // Import model files //
 
-import { User } from "@/models/user";
+import User from "../../../../models/user.js";
+
+export const runtime = 'nodejs';
 
 // Create post route to login user //
 export async function POST(req) {
@@ -38,6 +40,10 @@ const user = await User.findOne({ full_name,
   return res;
 
     } catch (err) {
+      const msg =
+          process.env.NODE_ENV === "development"
+            ? err.parent?.sqlMessage || err.message
+            : "Error retrieving groups";
         return NextResponse.json({ error: "failed Logging in" }, { status: 400 });
     }
 }

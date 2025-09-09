@@ -58,7 +58,7 @@ Groups.init (
     modelName: "Groups",
     tableName: "groups",
     freezeTableName: true,   
-    underscored: true,     
+    underscored: false,     
     timestamps: true, 
             }
         )

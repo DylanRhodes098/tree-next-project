@@ -19,7 +19,11 @@ export async function GET(req) {
 
     return NextResponse.json(groups, {status:200});
     } catch (err) {
-        return NextResponse.json({ error: "Error retrieving groups" }, { status: 500 });
+        const msg =
+          process.env.NODE_ENV === "development"
+            ? err.parent?.sqlMessage || err.message
+            : "Error retrieving groups";
+        return NextResponse.json(msg, { error: "Error retrieving groups" }, { status: 500 });
     }
 }
 
@@ -27,7 +31,7 @@ export async function GET(req) {
 // Create a post route to create a group //
 export async function POST(req) {
     try {
-    const { name, linkedin, whatsapp, instagram, snapchat, tiktok, notes } = req.json;
+    const { name, linkedin, whatsapp, instagram, snapchat, tiktok, notes } = req.json();
 
     if (!name) {
         return NextResponse.json({ error: "Missing fields" }, { status: 400 });
@@ -39,7 +43,11 @@ export async function POST(req) {
         return NextResponse.json(createGroup, { status: 200 });
 
     } catch (err) {
-        return NextResponse.json({ error: "failed creating group" }, { status: 400 });
+        const msg =
+          process.env.NODE_ENV === "development"
+            ? err.parent?.sqlMessage || err.message
+            : "Error retrieving groups";
+        return NextResponse.json(msg, { error: "failed creating group" }, { status: 400 });
     }
 }
 
