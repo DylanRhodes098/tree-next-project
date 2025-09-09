@@ -24,6 +24,8 @@ if (sequelize.models.User) {
 }
 }
 
+
+if (!sequelize.models.User) {
 // Create columns for db using init //
 User.init (
     {
@@ -78,11 +80,13 @@ User.init (
                 modelName: "User",
                 tableName: "user",
                 freezeTableName: true,
-                underscore: true,
+                underscored: true,
                 timestamps: true,
+        
+          
             }
         )
+      };
 
-        export default User;
-
+        export default sequelize.models.User;
 

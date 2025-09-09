@@ -5,17 +5,20 @@ import { DataTypes } from "sequelize";
 
 // Import model files //
 
-import { User, profile, connections, groups } from "@/models/";
+import User from "./user.js";
+import Groups from "./groups.js";
+import Profile from "./profile.js";
+
 
 // Create hasmany relationships //
 if (!User.associations.groups) 
-    User.hasmany(groups, {
+    User.hasmany(Groups, {
     foreignKey: 'usersGroup',
     as: 'groups'
 });
 
 if (!groups.associations.profile) 
-    groups.hasmany(profile, {
+    groups.hasmany(Profile, {
     foreignKey: 'profiles',
     as: 'profile'
 });
@@ -29,26 +32,26 @@ if (!groups.associations.User)
 });
 
 if (!profile.associations.groups) 
-    profile.belongTo(groups, {
+    Profile.belongTo(Groups, {
     foreignKey: 'profiles',
     as: 'groups'
 });
 
 // Create belongstoMany relationships //
 if (!profile.associations.connector) 
-profile.belongsToMany(profile, {
+Profile.belongsToMany(Profile, {
     through: connections,
     as: 'connector',
     foreignKey: 'connectedToId',
     otherKey: 'connectorId'
   });
   
-  if (!profile.associations.connectedTo) 
-    profile.belongsToMany(profile, {
+  if (!Profile.associations.connectedTo) 
+    Profile.belongsToMany(Profile, {
         through: connections,
         as: 'connectedTo',
         foreignKey: 'connectorId',
         otherKey: 'connectedToId'
       });
 
-      export { User, connections, profile, groups };
+      export { User, connections, Profile, Groups };
