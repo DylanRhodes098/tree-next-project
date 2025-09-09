@@ -3,17 +3,11 @@ import sequelize from "../lib/db.js";
 
 import {Model, DataTypes} from "sequelize";
 
-export class Profile extends Model {
-toJSON() {
-const values = {...this.get}
-delete values.password
-return values;
-}
-}
+export class Profile extends Model {}
 
 export const hotReloads = () => {
-if (sequelize.models.profile) {
-    return sequelize.models.profile;
+if (sequelize.models.Profile) {
+    return sequelize.models.Profile;
 }
 }
 
@@ -97,6 +91,7 @@ Profile.init (
             sequelize,
             modelName: "Profile",
             tableName: "profile",
+            freezeTableName: true,
             timestamps: true,
             underscored: true,
           }

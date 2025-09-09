@@ -3,12 +3,9 @@
 
 // Import tools //
 import { NextResponse } from "next/server";
-import bcrypt from "bcrypt";
-import { signToken } from "@/lib/auth";
+import User from "../../../../models/user.js";
 
-// Import model files //
-
-import { User } from "@/models/user";
+export const runtime = 'nodejs';
 
 // Create get route to retrieve all users //
 export async function GET() {
@@ -44,7 +41,11 @@ const userRegister = await User.create(
     return NextResponse.json(userRegister, { status: 200 });
 
     } catch (err) {
-        return NextResponse.json({ error: "failed creating user" }, { status: 400 });
+        const msg =
+          process.env.NODE_ENV === "development"
+            ? err.parent?.sqlMessage || err.message
+            : "Error retrieving groups";
+        return NextResponse.json(msg, { error: "failed creating user" }, { status: 400 });
     }
 }
 
