@@ -7,8 +7,21 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "//": "complex seed.",
+
+    "//": "Migration seed.",
+    "migrate": "sequelize-cli db:migrate --env development",
+    "migrate:undo": "sequelize-cli db:migrate:undo:all --env development",
+
+    "seeder": "sequelize-cli db:seed:all --env development",
+    "seeder:undo": "sequelize-cli db:seed:undo:all --env development",
+
+    "migrate&Seeder": "npm run migrate && npm run seeder",
+    "undoMigrate&Seeder": "npm run migrate:undo && npm run seeder:undo",
+
+    "//": "simple seed.",
     "seed:simple": "node scripts/seed.simple.js",
+
+    "//": "complex seed.",
     "seed": "node -r dotenv/config scripts/seed.js",
     "seed:dev": "cross-env SEED_ENV=development SEED_FORCE=true node -r dotenv/config scripts/seed.js",
     "seed:test": "cross-env SEED_ENV=test SEED_FORCE=true node -r dotenv/config scripts/seed.js",
