@@ -19,38 +19,64 @@ Groups.init (
       allowNull: false,
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
+      validate: {
+        isUUID: 4,
+      },
     },
+
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: true,   
+        len: [2, 100],    
+      },
     },
 
     // social platforms
     linkedin: {
       type: DataTypes.STRING,
       allowNull: true,
+      validate: {
+        isUrl: true,      
+      },
     },
     whatsapp: {
-      type: DataTypes.STRING, 
+      type: DataTypes.STRING,
       allowNull: true,
+      validate: {
+       
+      },
     },
     instagram: {
       type: DataTypes.STRING,
       allowNull: true,
+      validate: {
+        
+      },
     },
     snapchat: {
       type: DataTypes.STRING,
       allowNull: true,
+      validate: {
+        
+      },
     },
     tiktok: {
       type: DataTypes.STRING,
       allowNull: true,
+      validate: {
+        
+      },
     },
 
     // extra info
     notes: {
-      type: DataTypes.TEXT, 
+      type: DataTypes.TEXT,
       allowNull: true,
+      validate: {
+        len: [0, 1000], 
+      },
     },
   },
   {

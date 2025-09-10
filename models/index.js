@@ -11,34 +11,34 @@ import Profile from "./profile.js";
 
 
 // Create hasmany relationships //
-if (!User.associations.groups) 
-    User.hasmany(Groups, {
+if (!User.associations.Groups) 
+    User.hasMany(Groups, {
     foreignKey: 'usersGroup',
     as: 'groups'
 });
 
-if (!groups.associations.profile) 
-    groups.hasmany(Profile, {
+if (!Groups.associations.profile) 
+    Groups.hasMany(Profile, {
     foreignKey: 'profiles',
     as: 'profile'
 });
 
 
 // Create belongsto relationships //
-if (!groups.associations.User) 
-    groups.belongTo(User, {
+if (!Groups.associations.User) 
+    Groups.belongTo(User, {
     foreignKey: 'usersGroup',
     as: 'User'
 });
 
-if (!profile.associations.groups) 
+if (!Profile.associations.Groups) 
     Profile.belongTo(Groups, {
     foreignKey: 'profiles',
     as: 'groups'
 });
 
 // Create belongstoMany relationships //
-if (!profile.associations.connector) 
+if (!Profile.associations.connector) 
 Profile.belongsToMany(Profile, {
     through: connections,
     as: 'connector',

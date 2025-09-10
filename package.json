@@ -7,21 +7,15 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-
-    "//": "Migration seed.",
+    "//": "complex seed.",
     "migrate": "sequelize-cli db:migrate --env development",
     "migrate:undo": "sequelize-cli db:migrate:undo:all --env development",
-
     "seeder": "sequelize-cli db:seed:all --env development",
     "seeder:undo": "sequelize-cli db:seed:undo:all --env development",
-
     "migrate:Seeder": "sequelize-cli db:migrate --env development && sequelize-cli db:seed:all --env development",
-    "undoMigrate:Seeder": "sequelize-cli db:seed:undo:all --env development && sequelize-cli db:migrate:undo:all --env development",
-
-    "//": "simple seed.",
+    "undo:Migrate:Seeder": "sequelize-cli db:seed:undo:all --env development && sequelize-cli db:migrate:undo:all --env development",
+    "redo:Migrate": "sequelize-cli db:seed:undo:all --env development && sequelize-cli db:migrate:undo:all --env development && sequelize-cli db:migrate --env development && sequelize-cli db:seed:all --env development",
     "seed:simple": "node scripts/seed.simple.js",
-
-    "//": "complex seed.",
     "seed": "node -r dotenv/config scripts/seed.js",
     "seed:dev": "cross-env SEED_ENV=development SEED_FORCE=true node -r dotenv/config scripts/seed.js",
     "seed:test": "cross-env SEED_ENV=test SEED_FORCE=true node -r dotenv/config scripts/seed.js",
@@ -38,7 +32,8 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "sequelize": "^6.37.7",
-    "sequelize-cli": "^6.6.3"
+    "sequelize-cli": "^6.6.3",
+    "zod": "^4.1.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -34,28 +34,44 @@ User.init (
             allowNull: false,
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4,
+            timestamps: true,
           },
           full_name: {
             type: DataTypes.STRING,
             allowNull: false,
-        
+            timestamps: true,
+            validate: {
+              notEmpty: true,  
+            }
           },
           email: {
             type: DataTypes.STRING,
             allowNull: false,
+            timestamps: true,
+            validate: {
+              isEmail: true,            
+              notEmpty: true,
+            },
             unique: {
               name: "unique_email",
-              msg: "Email must be unique"
+              msg: "Email must be unique",
             }
           },
           avatar: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            timestamps: true,
+            validate: {
+              isUrl: true,              // must be a valid URL
+            }
           },
           password: {
             type: DataTypes.STRING,
             allowNull: false,
+            timestamps: true,
             validate: {
-              len: [8],
+              len: [8, 100],
+              notEmpty: true,
+              is: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$/, 
             },
           }
         },

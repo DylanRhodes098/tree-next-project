@@ -11,81 +11,129 @@ if (sequelize.models.Profile) {
 }
 }
 
-Profile.init (
-    {
-        id: {
-            type: DataTypes.UUID,
-            allowNull: false,
-            primaryKey: true,
-            defaultValue: DataTypes.UUIDV4,
-          },
-        full_name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
-        address: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
-        mobile_number: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
-        date_of_birth: {
-            type: DataTypes.DATE,
-            allowNull: false,
-          },
+Profile.init ({
+  id: {
+    type: DataTypes.UUID,
+    allowNull: false,
+    primaryKey: true,
+    defaultValue: DataTypes.UUIDV4,
+  },
 
-          // social platforms //
-        linkedin: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
-        whatsapp: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
-        instagram: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
-        snapchat: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
-        tiktok: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
+  full_name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
 
-          // extra info //
-        interests: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
-        notes: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
+  address: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      len: [5, 255],
+    },
+  },
 
-          // metadata
-          groupsId: {
-            type: DataTypes.UUID,
-            allowNull: false, 
-          },
-        createdAt: {
-            type: DataTypes.DATE,
-            allowNull: false,
-          },
-        updatedAt: {
-            type: DataTypes.DATE,
-            allowNull: false,
-          },
-        },
+  mobile_number: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      is: /^[0-9+\-\s()]{7,20}$/i,
+    },
+  },
+
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      isEmail: true, 
+    },
+  },
+
+  date_of_birth: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    validate: {
+      isDate: true,
+      isBefore: new Date().toISOString(), // must be in the past
+    },
+  },
+
+  // social platforms
+  linkedin: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      isUrl: true,
+    },
+  },
+  whatsapp: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+  
+    },
+  },
+  instagram: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+  
+    },
+  },
+  snapchat: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+  
+    },
+  },
+  tiktok: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+
+    },
+  },
+
+  // extra info
+  interests: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+    
+    },
+  },
+  notes: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+     
+    },
+  },
+
+  // foreign key
+  groupsId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+      isUUID: 4,
+    },
+  },
+
+  createdAt: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW,
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW,
+  },
+},
           {
             sequelize,
             modelName: "Profile",
