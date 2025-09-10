@@ -24,7 +24,7 @@ export async function GET(req) {
           process.env.NODE_ENV === "development"
             ? err.parent?.sqlMessage || err.message
             : "Error retrieving groups";
-        return NextResponse.json({ error: "Error retrieving profiles" }, { status: 500 });
+        return NextResponse.json(msg, { error: "Error retrieving profiles" }, { status: 500 });
     }
 }
 
@@ -32,19 +32,23 @@ export async function GET(req) {
 // Create a post route to create a profile //
 export async function POST(req) {
     try {
-    const { full_name, address, mobile_number, email, date_of_birth, linkedin, whatsapp, instagram, snapchat, tiktok, interests, notes } = req.json;
+    const { full_name, address, mobile_number, email, date_of_birth, linkedin, whatsapp, instagram, snapchat, tiktok, interests, notes, groupsId } = await req.json();
 
     if (!full_name) {
         return NextResponse.json({ error: "Missing fields" }, { status: 400 });
       }
          
     const createProfile = await Profile.create({
-        full_name, address, mobile_number, email, date_of_birth, linkedin, whatsapp, instagram, snapchat, tiktok, interests, notes })
+        full_name, address, mobile_number, email, date_of_birth, linkedin, whatsapp, instagram, snapchat, tiktok, interests, notes, groupsId })
         
         return NextResponse.json(createProfile, { status: 200 });
 
     } catch (err) {
-        return NextResponse.json({ error: "failed creating profile" }, { status: 400 });
+        const msg =
+        process.env.NODE_ENV === "development"
+          ? err.parent?.sqlMessage || err.message
+          : "Error retrieving groups";
+        return NextResponse.json(msg, { error: "failed creating profile" }, { status: 400 });
     }
 }
 

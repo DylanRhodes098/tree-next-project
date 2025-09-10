@@ -7,7 +7,7 @@ export async function up(queryInterface, Sequelize) {
 await queryInterface.createTable('groups', {
 // Add data //
 id: {
-      type: Sequelize.DataTypes.UUIDV,
+      type: Sequelize.DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
       defaultValue: Sequelize.DataTypes.UUIDV4,

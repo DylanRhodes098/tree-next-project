@@ -15,8 +15,8 @@
     "seeder": "sequelize-cli db:seed:all --env development",
     "seeder:undo": "sequelize-cli db:seed:undo:all --env development",
 
-    "migrate&Seeder": "npm run migrate && npm run seeder",
-    "undoMigrate&Seeder": "npm run migrate:undo && npm run seeder:undo",
+    "migrate:Seeder": "sequelize-cli db:migrate --env development && sequelize-cli db:seed:all --env development",
+    "undoMigrate:Seeder": "sequelize-cli db:seed:undo:all --env development && sequelize-cli db:migrate:undo:all --env development",
 
     "//": "simple seed.",
     "seed:simple": "node scripts/seed.simple.js",

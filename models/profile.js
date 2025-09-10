@@ -28,9 +28,8 @@ Profile.init (
             allowNull: false,
           },
         mobile_number: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: 0
           },
         email: {
             type: DataTypes.STRING,
@@ -47,7 +46,7 @@ Profile.init (
             allowNull: false,
           },
         whatsapp: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
           },
         instagram: {
@@ -76,13 +75,13 @@ Profile.init (
           // metadata
           groupsId: {
             type: DataTypes.UUID,
-            allowNull: false,
+            allowNull: false, 
           },
-        created_at: {
+        createdAt: {
             type: DataTypes.DATE,
             allowNull: false,
           },
-        updated_at: {
+        updatedAt: {
             type: DataTypes.DATE,
             allowNull: false,
           },
@@ -93,7 +92,7 @@ Profile.init (
             tableName: "profile",
             freezeTableName: true,
             timestamps: true,
-            underscored: true,
+            underscored: false,
           }
         );
     

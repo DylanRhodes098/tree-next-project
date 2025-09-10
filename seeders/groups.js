@@ -1,11 +1,11 @@
 'use-strict'
 
 export async function up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('groups', [{
-        
+    await queryInterface.bulkInsert('groups', [
+        {
                 id: 'd6f5d3b0-12ab-4c9f-bbbb-1234567890ab',
                 name: "grangerdang",
-                linkedin: "",
+                linkedin: " ",
                 whatsapp: "grangerdang",
                 instagram: "grangerdang",
                 snapchat: "grangerdang",

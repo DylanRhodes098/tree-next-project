@@ -31,7 +31,7 @@ export async function GET(req) {
 // Create a post route to create a group //
 export async function POST(req) {
     try {
-    const { name, linkedin, whatsapp, instagram, snapchat, tiktok, notes } = req.json();
+    const { name, linkedin, whatsapp, instagram, snapchat, tiktok, notes } = await req.json();
 
     if (!name) {
         return NextResponse.json({ error: "Missing fields" }, { status: 400 });
