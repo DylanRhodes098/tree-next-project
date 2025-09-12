@@ -61,7 +61,7 @@ User.init (
             type: DataTypes.STRING,
             timestamps: true,
             validate: {
-              isUrl: true,              // must be a valid URL
+              isUrl: true,             
             }
           },
           password: {

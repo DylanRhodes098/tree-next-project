@@ -1,11 +1,22 @@
-import { zod } from "zod";
+import { z } from "zod";
 
-const userCreate = zod.object({
-    name: zod.string().min(3),
-    email:zod.string().email(),
-    password:zod.string().min(8),
+export const userCreate = z.object({
+    full_name: z.string().min(3),
+    email: z.string().email(),
+    password: z.string().min(8),
 });
 
-const optionalUsercreate = zod.partial();
+export const userUpdate = userCreate.partial();
 
-export default {userCreate, optionalUsercreate};
+export const userDelete = z.object({
+    id: z.string().uuid()({ version: "uuidv4" })
+})
+
+export const optionalUserDelete = userDelete.partial();
+
+export default {
+    userCreate, 
+    userDelete, 
+    userUpdate, 
+    optionalUserDelete,
+};

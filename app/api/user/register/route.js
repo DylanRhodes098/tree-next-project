@@ -1,8 +1,6 @@
-// Import libraries //
-
-
 // Import tools //
 import { NextResponse } from "next/server";
+import { userCreate } from "../../../../validation/user";
 import User from "../../../../models/user.js";
 
 export const runtime = 'nodejs';
@@ -26,17 +24,21 @@ return NextResponse.json(users);
 // Create post route to register user //
 export async function POST(req) {
     try{
-const { full_name, email, password } = await req.json();
-if (!full_name || !email || !password ) {
-    return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+const body = await req.json();
+
+const parsed = userCreate.safeParse(body);
+
+if(!parsed.success) {
+    return NextResponse.json({ error: "Invalid data fields", message: parsed.error.format() }, { status: 400 });
 }
 
-const userRegister = await User.create(
-    {
+const { full_name, email, password } = parsed.data;
+
+const userRegister = await User.create({
     full_name,
     email: email.trim().toLowerCase(),
     password
-    })
+    });
 
     return NextResponse.json(userRegister, { status: 200 });
 
