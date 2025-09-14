@@ -26,13 +26,13 @@ if (!Groups.associations.profile)
 
 // Create belongsto relationships //
 if (!Groups.associations.User) 
-    Groups.belongTo(User, {
+    Groups.belongsTo(User, {
     foreignKey: 'usersGroup',
     as: 'User'
 });
 
 if (!Profile.associations.Groups) 
-    Profile.belongTo(Groups, {
+    Profile.belongsTo(Groups, {
     foreignKey: 'profiles',
     as: 'groups'
 });

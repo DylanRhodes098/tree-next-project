@@ -9,7 +9,7 @@ export const userCreate = z.object({
 export const userUpdate = userCreate.partial();
 
 export const userDelete = z.object({
-    id: z.string().uuid()({ version: "uuidv4" })
+    id: z.string().uuid(),
 })
 
 export const optionalUserDelete = userDelete.partial();
