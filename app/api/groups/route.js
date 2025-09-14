@@ -7,7 +7,7 @@ import { signToken } from "@/lib/auth";
 
 // Import model files //
 
-import {Groups} from "../../../models/groups";
+import {Groups} from "../../../models/group";
 
 // Define node runtime //
 export const runtime = 'nodejs';

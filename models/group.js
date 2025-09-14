@@ -3,16 +3,16 @@ import sequelize from "../lib/db.js";
 
 import {Model, DataTypes} from "sequelize";
 
-export class Groups extends Model {}
+export class Group extends Model {}
 
 export const hotReloads = () => {
-    if (sequelize.models.Groups) {
-        return sequelize.models.Groups;
+    if (sequelize.models.Group) {
+        return sequelize.models.Group;
     }
     }
 
 // Create columns for db using init //
-Groups.init (
+Group.init (
   {
     id: {
       type: DataTypes.UUID,
@@ -81,7 +81,7 @@ Groups.init (
   },
   {
     sequelize,
-    modelName: "Groups",
+    modelName: "Group",
     tableName: "groups",
     freezeTableName: true,   
     underscored: false,     
@@ -89,4 +89,4 @@ Groups.init (
             }
         )
 
-        export default Groups;
+        export default Group;
