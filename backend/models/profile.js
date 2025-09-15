@@ -36,7 +36,7 @@ Profile.init ({
   },
 
   mobile_number: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false,
     validate: {
       is: /^[0-9+\-\s()]{7,20}$/i,

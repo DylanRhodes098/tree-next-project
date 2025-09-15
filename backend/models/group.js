@@ -37,9 +37,6 @@ Group.init (
     linkedin: {
       type: DataTypes.STRING,
       allowNull: true,
-      validate: {
-        isUrl: true,      
-      },
     },
     whatsapp: {
       type: DataTypes.STRING,

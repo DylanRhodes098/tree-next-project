@@ -4,10 +4,11 @@ import {sequelize} from '@/lib/db.js'
 // Import tools //
 import { NextResponse } from "next/server";
 import { signToken } from "@/lib/auth";
+import {groupCreate} from "../../../validation/group";
 
 // Import model files //
 
-import {Groups} from "../../../models/group";
+import {Group} from "../../../models/group";
 
 // Define node runtime //
 export const runtime = 'nodejs';
@@ -15,7 +16,7 @@ export const runtime = 'nodejs';
 // Create a get route to retrieve all groups //
 export async function GET(req) {
     try {
-    const groups = await Groups.findAll();
+    const groups = await Group.findAll();
 
     return NextResponse.json(groups, {status:200});
     } catch (err) {
@@ -31,13 +32,16 @@ export async function GET(req) {
 // Create a post route to create a group //
 export async function POST(req) {
     try {
-    const { name, linkedin, whatsapp, instagram, snapchat, tiktok, notes } = await req.json();
+    const body = await req.json();
+    const parsed = groupCreate.safeParse(body);
 
-    if (!name) {
-        return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+    if (!parsed.success) {
+        return NextResponse.json({ error: "Missing fields", message:parsed.error.format() }, { status: 400 });
       }
+    
+      const { name, linkedin, whatsapp, instagram, snapchat, tiktok, notes } = parsed.data;
          
-    const createGroup = await Groups.create({
+        const createGroup = await Group.create({
         name, linkedin, whatsapp, instagram, snapchat, tiktok, notes })
         
         return NextResponse.json(createGroup, { status: 200 });
@@ -47,7 +51,7 @@ export async function POST(req) {
           process.env.NODE_ENV === "development"
             ? err.parent?.sqlMessage || err.message
             : "Error retrieving groups";
-        return NextResponse.json(msg, { error: "failed creating group" }, { status: 400 });
+        return NextResponse.json({ msg, error: "failed creating group" }, { status: 400 });
     }
 }
 

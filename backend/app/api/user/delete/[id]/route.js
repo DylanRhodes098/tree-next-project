@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import { userDelete } from "../../../../../validation/user";
-import { User } from "@/models";
+import { User } from "../../../../../models/user";
 
 export async function DELETE(req, {params} ) {
   try {
   
-    const parsed = userDelete.safeParse({ id: params.id });
+    const parsed = userDelete.safeParse({ id: (await params).id });
     if (!parsed.success) {
       return NextResponse.json({ error: "Missing user id", message:parsed.error.format() }, { status: 400 });
     }

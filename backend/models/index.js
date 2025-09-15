@@ -7,6 +7,8 @@ import { DataTypes } from "sequelize";
 import User from "./user.js";
 import Group from "./group.js";
 import Profile from "./profile.js";
+import connections from "./connections.js";
+
 
 console.log("[models] registered:", Object.keys(sequelize.models));
 

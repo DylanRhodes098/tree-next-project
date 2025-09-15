@@ -3,6 +3,7 @@
 
 // Import tools //
 import { NextResponse } from "next/server";
+import { profileCreate } from "../../../validation/profile";
 
 
 // Import model files //
@@ -32,14 +33,14 @@ export async function GET(req) {
 // Create a post route to create a profile //
 export async function POST(req) {
     try {
-    const { full_name, address, mobile_number, email, date_of_birth, linkedin, whatsapp, instagram, snapchat, tiktok, interests, notes, groupsId } = await req.json();
+    const body = await req.json();
+    const parsed = profileCreate.safeParse(body);
 
-    if (!full_name) {
-        return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+    if (!parsed.success) {
+        return NextResponse.json({ error: "Missing fields", message: parsed.error.format() }, { status: 400 });
       }
          
-    const createProfile = await Profile.create({
-        full_name, address, mobile_number, email, date_of_birth, linkedin, whatsapp, instagram, snapchat, tiktok, interests, notes, groupsId })
+      const createProfile = await Profile.create(parsed.data);
         
         return NextResponse.json(createProfile, { status: 200 });
 
