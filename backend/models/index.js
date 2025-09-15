@@ -1,44 +1,46 @@
 // Import libararies //
-
 import sequelize from "../lib/db";
 import { DataTypes } from "sequelize";
 
 // Import model files //
 
 import User from "./user.js";
-import Groups from "./groups.js";
+import Group from "./group.js";
 import Profile from "./profile.js";
+import connections from "./connections.js";
 
+
+console.log("[models] registered:", Object.keys(sequelize.models));
 
 // Create hasmany relationships //
-if (!User.associations.Groups) 
-    User.hasMany(Groups, {
+if (!User.associations?.groups) 
+    User.hasMany(Group, {
     foreignKey: 'usersGroup',
     as: 'groups'
 });
 
-if (!Groups.associations.profile) 
-    Groups.hasMany(Profile, {
+if (!Group.associations?.profile) 
+    Group.hasMany(Profile, {
     foreignKey: 'profiles',
     as: 'profile'
 });
 
 
 // Create belongsto relationships //
-if (!Groups.associations.User) 
-    Groups.belongsTo(User, {
+if (!Group.associations?.User) 
+    Group.belongsTo(User, {
     foreignKey: 'usersGroup',
     as: 'User'
 });
 
-if (!Profile.associations.Groups) 
-    Profile.belongsTo(Groups, {
+if (!Profile.associations?.groups) 
+    Profile.belongsTo(Group, {
     foreignKey: 'profiles',
     as: 'groups'
 });
 
 // Create belongstoMany relationships //
-if (!Profile.associations.connector) 
+if (!Profile.associations?.connector) 
 Profile.belongsToMany(Profile, {
     through: connections,
     as: 'connector',
@@ -46,7 +48,7 @@ Profile.belongsToMany(Profile, {
     otherKey: 'connectorId'
   });
   
-  if (!Profile.associations.connectedTo) 
+  if (!Profile.associations?.connectedTo) 
     Profile.belongsToMany(Profile, {
         through: connections,
         as: 'connectedTo',
@@ -54,4 +56,4 @@ Profile.belongsToMany(Profile, {
         otherKey: 'connectedToId'
       });
 
-      export { User, connections, Profile, Groups };
+      export { User, connections, Profile, Group };

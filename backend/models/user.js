@@ -104,5 +104,5 @@ User.init (
         )
       };
 
-        export default sequelize.models.User;
+        export default User;
 
