@@ -19,8 +19,7 @@ export async function POST(req) {
             return NextResponse.json({ error: "Missing fields" }, { status: 400 });
         }
 
-const user = await User.findOne({ full_name, 
-    where: { email: String(email).trim().toLowerCase() },
+const user = await User.findOne({ full_name, where: { email: String(email).trim().toLowerCase() },
   });
 
   const ok = user && bcrypt.compare(password, user.password)
@@ -28,7 +27,8 @@ const user = await User.findOne({ full_name,
     return NextResponse.json({ error: "incorrect info" }, { status: 400 });
   }
 
-  const userLogin = await signToken(user)
+  const userLogin = await signToken({ id: user.id, email: user.email })
+
   const res = NextResponse.json(userLogin, { status: 200 });
   res.cookies.set("session", userLogin, {
     httpOnly: true,
@@ -37,6 +37,7 @@ const user = await User.findOne({ full_name,
     path: "/",
     maxAge: 60 * 60, // 1h
   });
+
   return res;
 
     } catch (err) {

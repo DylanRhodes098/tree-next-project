@@ -13,8 +13,8 @@ api.interceptors.request.use((config) => {
 });
 
 api.interceptors.response.use(
-  (response) => response,
-  (error) => {
+    (response) => response,
+    (error) => {
     if (error.response) {
       const status = error.response.status;
 
