@@ -3,6 +3,7 @@ import { register as registerUser } from "../services/auth.js";
 import { useNavigate, Link } from "react-router-dom";
 
 export default function Register() {
+  const [full_name, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
@@ -12,8 +13,8 @@ export default function Register() {
     e.preventDefault();
     setErr("");
     try {
-      await registerUser({ email, password });
-      navigate("/", { replace: true });
+      await registerUser({ full_name, email, password });
+      navigate("/register", { replace: true });
     } catch (error) {
       setErr(error?.response?.data?.error || "Registration failed");
     }
@@ -23,6 +24,12 @@ export default function Register() {
     <div style={{ maxWidth: 360, margin: "10vh auto" }}>
       <h1>Create account</h1>
       <form onSubmit={onSubmit}>
+      <input
+          placeholder="Full Name"
+          value={full_name}
+          onChange={(e)=>setFullName(e.target.value)}
+          autoComplete="fullName"
+        />
         <input
           placeholder="Email"
           value={email}
