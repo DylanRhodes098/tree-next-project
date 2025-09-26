@@ -14,15 +14,15 @@ export const runtime = 'nodejs';
 // Create post route to login user //
 export async function POST(req) {
     try{
-        const { full_name, email, password } = await req.json();
-        if (!full_name || !email || !password ) {
+        const { email, password } = await req.json();
+        if (!email || !password ) {
             return NextResponse.json({ error: "Missing fields" }, { status: 400 });
         }
 
-const user = await User.findOne({ full_name, where: { email: String(email).trim().toLowerCase() },
+const user = await User.findOne({ where: { email: String(email).trim().toLowerCase() },
   });
 
-  const ok = user && bcrypt.compare(password, user.password)
+  const ok = user && await bcrypt.compare(password, user.password)
   if (!ok) {
     return NextResponse.json({ error: "incorrect info" }, { status: 400 });
   }
@@ -45,7 +45,7 @@ const user = await User.findOne({ full_name, where: { email: String(email).trim(
           process.env.NODE_ENV === "development"
             ? err.parent?.sqlMessage || err.message
             : "Error retrieving groups";
-        return NextResponse.json({ error: "failed Logging in" }, { status: 400 });
+        return NextResponse.json({ msg, error: "failed Logging in" }, { status: 400 });
     }
 }
 

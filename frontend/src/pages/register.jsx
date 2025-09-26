@@ -14,13 +14,23 @@ export default function Register() {
     setErr("");
     try {
       await registerUser({ full_name, email, password });
-      navigate("/register", { replace: true });
+      navigate("/login", { replace: true });
     } catch (error) {
       setErr(error?.response?.data?.error || "Registration failed");
     }
   }
 
+  function warningMessage () {
+    if (!err) {
+      return null;
+    }
+    else {
+      return <p style={{ color: "crimson" }}>{err}</p>
+    }
+  }
+
   return (
+    <>
     <div style={{ maxWidth: 360, margin: "10vh auto" }}>
       <h1>Create account</h1>
       <form onSubmit={onSubmit}>
@@ -45,11 +55,12 @@ export default function Register() {
         />
         <button type="submit">Register</button>
       </form>
-      {err && <p style={{ color: "crimson" }}>{err}</p>}
+      {warningMessage()} 
       <p style={{ marginTop: 12 }}>
         Have an account? <Link to="/login">Login</Link>
       </p>
     </div>
+       </>
   );
 }
 
