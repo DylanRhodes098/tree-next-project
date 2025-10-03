@@ -30,38 +30,79 @@ export default function Register() {
   }
 
   return (
-    <>
-    <div style={{ maxWidth: 360, margin: "10vh auto" }}>
-      <h1>Create account</h1>
-      <form onSubmit={onSubmit}>
-      <input
-          placeholder="Full Name"
-          value={full_name}
-          onChange={(e)=>setFullName(e.target.value)}
-          autoComplete="fullName"
-        />
-        <input
-          placeholder="Email"
-          value={email}
-          onChange={(e)=>setEmail(e.target.value)}
-          autoComplete="email"
-        />
-        <input
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={(e)=>setPassword(e.target.value)}
-          autoComplete="new-password"
-        />
-        <button type="submit">Register</button>
+    <div className="mx-auto mt-24 w-full max-w-sm px-4">
+      <h1 className="mb-6 text-3xl font-semibold tracking-tight">Create account</h1>
+
+      {/* Error message */}
+      {err ? (
+        <div
+          role="alert"
+          aria-live="polite"
+          className="mb-4 rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-700"
+        >
+          {err}
+        </div>
+      ) : null}
+
+      <form onSubmit={onSubmit} className="space-y-3">
+        <div>
+          <label htmlFor="full_name" className="sr-only">
+            Full Name
+          </label>
+          <input
+            id="full_name"
+            placeholder="Full Name"
+            value={full_name}
+            onChange={(e) => setFullName(e.target.value)}
+            autoComplete="name"
+            className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="email" className="sr-only">
+            Email
+          </label>
+          <input
+            id="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoComplete="email"
+            className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="password" className="sr-only">
+            Password
+          </label>
+          <input
+            id="password"
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="new-password"
+            className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="mt-2 w-full rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+          disabled={!full_name || !email || !password}
+        >
+          Register
+        </button>
       </form>
-      {warningMessage()} 
-      <p style={{ marginTop: 12 }}>
-        Have an account? <Link to="/login">Login</Link>
+
+      <p className="mt-4 text-sm text-gray-600">
+        Have an account?{" "}
+        <Link to="/login" className="font-medium text-blue-600 hover:underline">
+          Login
+        </Link>
       </p>
     </div>
-       </>
   );
 }
-
-
