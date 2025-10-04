@@ -30,23 +30,23 @@ export default function Register() {
   }
 
   return (
-    <div className="mx-auto mt-24 w-full max-w-sm px-4">
-      <h1 className="mb-6 text-3xl font-semibold tracking-tight">Create account</h1>
+    <div className="h-screen w-screen flex flex-col p-1 m-1 items-center text-center">
+      <h1 className="text-3xl text-red-500">Create account</h1>
 
       {/* Error message */}
       {err ? (
         <div
           role="alert"
           aria-live="polite"
-          className="mb-4 rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-700"
+          className=""
         >
           {err}
         </div>
       ) : null}
 
-      <form onSubmit={onSubmit} className="space-y-3">
-        <div>
-          <label htmlFor="full_name" className="sr-only">
+      <form onSubmit={onSubmit} className="m-4 flex flex-col items-center border-2 rounded w-80">
+        <div className="p-4 flex flex-col items-center">
+          <label htmlFor="full_name" className="">
             Full Name
           </label>
           <input
@@ -55,12 +55,12 @@ export default function Register() {
             value={full_name}
             onChange={(e) => setFullName(e.target.value)}
             autoComplete="name"
-            className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700"
+            className="border-2 rounded"
           />
         </div>
 
-        <div>
-          <label htmlFor="email" className="sr-only">
+        <div className="p-4 flex flex-col items-center">
+          <label htmlFor="email" className="">
             Email
           </label>
           <input
@@ -69,12 +69,12 @@ export default function Register() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             autoComplete="email"
-            className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700"
+            className="border-2 rounded"
           />
         </div>
 
-        <div>
-          <label htmlFor="password" className="sr-only">
+        <div className="p-4 flex flex-col items-center">
+          <label htmlFor="password" className="">
             Password
           </label>
           <input
@@ -84,22 +84,22 @@ export default function Register() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="new-password"
-            className="block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700"
+            className="border-2 rounded"
           />
         </div>
 
         <button
           type="submit"
-          className="mt-2 w-full rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+          className="w-40 m-4 border border-black rounded-xl hover:bg-blue-200 cursor-pointer transition-all duration-300 transition-all duration-300 ease-in-out"
           disabled={!full_name || !email || !password}
         >
           Register
         </button>
       </form>
 
-      <p className="mt-4 text-sm text-gray-600">
+      <p className="">
         Have an account?{" "}
-        <Link to="/login" className="font-medium text-blue-600 hover:underline">
+        <Link to="/login" className="w-1/2 underline hover:text-blue-200 cursor-pointer transition-all duration-300 transition-all duration-300 ease-in-out">
           Login
         </Link>
       </p>
