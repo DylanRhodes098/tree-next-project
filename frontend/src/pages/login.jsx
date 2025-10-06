@@ -30,15 +30,24 @@ export default function Login() {
 
     return (
         <> 
-        <div>
-            <h1> login </h1>
-            <form onSubmit={onSubmit}>
+        <div className="h-screen w-screen flex flex-col p-1 m-1 items-center text-center">
+            <h1 className="text-2xl text-red-500 "> login </h1>
+            <form className="m-4 flex flex-col items-center border-2 rounded w-80" onSubmit={onSubmit}>
+                <div className="p-4 flex flex-col items-center">
+            <label htmlFor="email" className="">
+            Email
+          </label>
                 <input type="text" 
                 placeholder="email"
                 value={email}
                 onChange={(e)=>
                 setEmail(e.target.value)}
                 />
+                </div>
+                <div className="p-4 flex flex-col items-center">
+                <label htmlFor="password" className="">
+            Password
+          </label>
                 <input 
                 type="password" 
                 placeholder="password"
@@ -46,7 +55,8 @@ export default function Login() {
                 onChange={(e)=>
                 setPassword(e.target.value)}
                 />
-                <button type="submit">Submit</button>
+                </div>
+                <button className="w-40 m-4 border border-black rounded-xl hover:bg-blue-200 cursor-pointer transition-all duration-300 transition-all duration-300 ease-in-out" type="submit">Submit</button>
                 {warningMessage()}
             </form>
         </div>

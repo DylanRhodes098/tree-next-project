@@ -34,11 +34,17 @@ if(!parsed.success) {
 
 const { full_name, email, password } = parsed.data;
 
+const beforeCount = await User.count();
+console.log("[POST /api/user/register] BEFORE count:", beforeCount, "DB:", sequelize.config?.database, sequelize.config?.host, sequelize.config?.port);
+
 const userRegister = await User.create({
     full_name,
     email: email.trim().toLowerCase(),
     password
     });
+
+const afterCount = await User.count();
+console.log("[POST /api/user/register] AFTER count:", afterCount);
 
     return NextResponse.json(userRegister, { status: 200 });
 
