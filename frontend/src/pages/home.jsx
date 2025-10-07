@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {logout as performLogout} from "../services/auth";
+import {logout as logOut} from "../services/auth";
 import { listGroups } from "../services/groups";
 import { createGroup } from "../services/groups";
 import { listProfiles } from "../services/profile";
@@ -17,7 +17,7 @@ export default function Home () {
          e.preventDefault();
          setErr("");
          try {
-            performLogout();
+            logOut();
             navigate("/login", {replace: true} );
          } catch (error) {
              setErr(error?.response?.data?.error || "logOut failed" );
@@ -68,7 +68,15 @@ export default function Home () {
             <ul className="mt-4">
                 {Array.isArray(group) && group.length > 0 ? (
                     group.map((g) => (
-                        <li key={g.id || g.name} className="text-lg">{g.name || JSON.stringify(g)}</li>
+                        <div key={g.id}>
+                        <li className="text-lg">Group Name:{g.name}</li>
+                        <li className="text-lg">Linkedin: {g.linkedin}</li>
+                        <li className="text-lg">Whatsapp: {g.whatsapp}</li>
+                        <li className="text-lg">Snapchat: {g.snapchat}</li>
+                        <li className="text-lg">Instagram: {g.instagram}</li>
+                        <li className="text-lg">TikTok: {g.tiktok}</li>
+                        <li className="text-lg">Notes: {g.notes}</li>
+                        </div>
                     ))
                 ) : (
                     <li className="text-sm text-gray-500">No groups loaded</li>
@@ -80,3 +88,6 @@ export default function Home () {
      )
 
 }
+
+
+    

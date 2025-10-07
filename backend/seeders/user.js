@@ -6,7 +6,7 @@ export async function up(queryInterface, Sequelize) {
             id: 'd6f5d3b0-12ab-4c9f-bbbb-1234567890ab',
             full_name: "james barret",
             email : "jamesbarret@gmail.com",
-            password : "imjames123"
+            password : "Imjames123."
         },
         {
             id: 'd6f5d3b0-12ab-4c9f-bbbb-1234567890ac',
