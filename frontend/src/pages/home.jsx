@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {logout as logOut} from "../services/auth";
 import { listGroups } from "../services/groups";
@@ -24,8 +24,7 @@ export default function Home () {
          }
      }
 
-     async function retrieveGroups (e) {
-        e.preventDefault();
+     async function retrieveGroups () {
         setErr("");
         try {
             const data = await listGroups();
@@ -48,6 +47,36 @@ export default function Home () {
         }
      }
 
+     async function retrieveProfile () {
+        setErr("");
+        try{
+            const data = await listProfiles();
+            setProfile(data);
+        } catch (error) {
+            setErr(error?.response?.data?.error || "failed retriveing Profiles")
+        }
+     }
+
+     async function createProfile (e) {
+        e.preventDefualt();
+        setErr("");
+        try {
+            const payload = {full_name, address, mobile_number, email, date_of_birth, linkedin, whatsapp, snapchat, tiktok};
+            const data = await createProfiles(payload);
+            setProfile(currentProfile => [...currentProfile, data]);
+        } catch (error) {
+            setErr(error?.response?.data?.error || "failed creating Profile");
+        }
+     }
+
+     useEffect (() => {
+        (async () => {
+            await retrieveGroups();
+            await retrieveProfile();
+        })(); 
+    }, []);
+
+
      function warningMessage () {
         if (!err) {
             return null;
@@ -62,7 +91,6 @@ export default function Home () {
             <h1 className="text-2xl">Groups</h1>
             {warningMessage()}
             <div className="flex gap-2 mt-2">
-              <button className="border p-2" onClick={retrieveGroups}>Load Groups</button>
               <button className="border p-2" onClick={logOutUser}>Logout</button>
             </div>
             <ul className="mt-4">
@@ -81,9 +109,27 @@ export default function Home () {
                 ) : (
                     <li className="text-sm text-gray-500">No groups loaded</li>
                 )}
-            </ul>
-        </div>
-        
+            </ul><br></br>
+            <ul>
+                {Array.isArray(profile) && profile.length > 0 ? (
+                profile.map((p) => (
+                    <div className="" key={p.id}>
+                        <li className="">{p.full_name}</li>
+                        <li className="">{p.address}</li>
+                        <li className="">{p.mobile_number}</li>
+                        <li className="">{p.email}</li>
+                        <li className="">{p.date_of_birth}</li>
+                        <li className="">{p.linkedin}</li>
+                        <li className="">{p.whatsapp}</li>
+                        <li className="">{p.snapchat}</li>
+                        <li className="">{p.tiktok}</li>
+                    </div>
+                ))
+            ) : (
+                <li className="text-sm text-gray-500">No profile loaded</li>
+            )}
+                </ul>
+                </div>
         </>
      )
 
