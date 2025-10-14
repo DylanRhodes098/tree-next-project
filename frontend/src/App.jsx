@@ -5,6 +5,7 @@ import Register from './pages/register';
 import Login from './pages/login';
 import Home from './pages/home';
 import Layout from './components/layout';
+import UserProfile from "./pages/userProfile";
 
 export default function App() {
 return (
@@ -16,6 +17,7 @@ return (
 
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="/userProfile" element={<UserProfile />} />
       </Route>
       </Routes>
     </>

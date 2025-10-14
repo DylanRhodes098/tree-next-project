@@ -1,6 +1,4 @@
-import {useState} from "react";
-import {userId} from "../services/user";
-import { useNavigate, Link } from "react-router-dom";
+import React from "react"
 
 export default function UserProfile () {
     return (
