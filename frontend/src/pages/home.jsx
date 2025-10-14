@@ -134,6 +134,3 @@ export default function Home () {
      )
 
 }
-
-
-    
