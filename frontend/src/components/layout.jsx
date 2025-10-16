@@ -10,8 +10,13 @@ export default function Layout () {
         <>
         <div>
         <TopNav></TopNav>
-      <SideNav></SideNav>
+
+        <main className="flex flex-row p-4">
+            <div className="pr-[4%]">
+      <SideNav />
+      </div>
       <Outlet />
+      </main>
     <Footer></Footer>
     </div>
         </>

@@ -3,17 +3,13 @@ const pages = [{
         value: "Home",
         href: "/home"
         }, { 
-        key: "login", 
-        value: "Login", 
-        href: "/login" 
-}, { 
-        key: "register", 
-        value: "Register", 
-        href: "/register" 
-},{
         key:"userProfile",
         value: "UserProfile",
         href: "/userProfile"
+        }, { 
+                key:"logOut",
+                value: "LogOut",
+                href: "/login"
 }]
 
 export default pages;
