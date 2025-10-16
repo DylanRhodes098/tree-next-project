@@ -2,6 +2,7 @@ import React from "react";
 import pages from "../data/navObject";
 import {NavLink, useNavigate} from "react-router-dom";
 import {logout} from "../services/auth";
+import DashboardLayoutBasic from "../styles/navigation";
 
 export default function SideNav () {
   const navigate = useNavigate()
@@ -13,6 +14,7 @@ export default function SideNav () {
 
     return (
         <>
+           <DashboardLayoutBasic></DashboardLayoutBasic>
         <nav>
       <ul>
         {pages.map((p) => (

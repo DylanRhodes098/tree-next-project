@@ -1,4 +1,7 @@
 const pages = [{
+                kind: 'header',
+                title: 'Main items',
+              }, {
         key:"home",
         value: "Home",
         href: "/home"
