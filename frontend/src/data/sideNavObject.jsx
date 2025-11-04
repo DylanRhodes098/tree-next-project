@@ -5,8 +5,3 @@ export const pages = [
   { label: 'Contact', ariaLabel: 'Get in touch', link: '/contact' }
 ];
 
-const socialItems = [
-  { label: 'Twitter', link: 'https://twitter.com' },
-  { label: 'GitHub', link: 'https://github.com' },
-  { label: 'LinkedIn', link: 'https://linkedin.com' }
-];

@@ -29,6 +29,24 @@
   z-index: 20;
 }
 
+.staggered-menu-wrapper:not([data-open]) .staggered-menu-panel {
+  transform: translateX(100%); /* for right position */
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 🔓 Menu OPEN */
+.staggered-menu-wrapper[data-open] .staggered-menu-panel {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* If your menu opens from the LEFT side */
+[data-position='left']:not([data-open]) .staggered-menu-panel {
+  transform: translateX(-100%);
+}
+
 .staggered-menu-header > * {
   pointer-events: auto;
 }
@@ -126,19 +144,9 @@
 }
 
 .staggered-menu-panel {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: clamp(260px, 38vw, 420px);
-  height: 100%;
-  background: white;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  display: flex;
-  flex-direction: column;
-  padding: 6em 2em 2em 2em;
-  overflow-y: auto;
-  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
 }
 
 [data-position='left'] .staggered-menu-panel {
@@ -349,3 +357,4 @@
     filter: invert(100%);
   }
 }
+

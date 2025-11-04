@@ -23,9 +23,7 @@ export default function Layout () {
       buttonTextColor="#fff"
       ease="power3.out"
     />
-        <main className="flex flex-row p-4">
-            <div className="pr-[4%]">
-            <div style={{ height: '100vh', background: '#1a1a1a' }}>
+    <div className="" style={{ height: '100vh', background: '#1a1a1a' }}>
   <SideNav
     position="right"
     items={pages}
@@ -36,12 +34,14 @@ export default function Layout () {
     openMenuButtonColor="#fff"
     changeMenuColorOnOpen={true}
     colors={['#B19EEF', '#5227FF']}
-    logoUrl="/path-to-your-logo.svg"
+    logoUrl="../assets/react.svg"
     accentColor="#ff6b6b"
     onMenuOpen={() => console.log('Menu opened')}
     onMenuClose={() => console.log('Menu closed')}
   />
 </div>
+        <main className="flex flex-row p-4">
+            <div className="pr-[4%]">
       </div>
       <Outlet />
       </main>

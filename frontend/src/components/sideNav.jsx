@@ -1,6 +1,6 @@
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import '../styles/sideNav.css';
+import '../styles/SideNav.css';
 
 export const SideNav = ({
   position = 'right',
