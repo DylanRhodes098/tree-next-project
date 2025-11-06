@@ -5,6 +5,8 @@ import { listGroups } from "../services/groups";
 import { createGroup } from "../services/groups";
 import { listProfiles } from "../services/profile";
 import { createProfiles } from "../services/profile";
+import React from 'react';
+import { Card, Space } from 'antd';
 
 export default function Home () {
     const navigate = useNavigate();
@@ -12,17 +14,6 @@ export default function Home () {
     const [profile, setProfile] = useState([]);
     const [group, setGroup] = useState([]); 
     const [form, setForm] = useState(""); 
-
-     function logOutUser (e) {
-         e.preventDefault();
-         setErr("");
-         try {
-            logOut();
-            navigate("/login", {replace: true} );
-         } catch (error) {
-             setErr(error?.response?.data?.error || "logOut failed" );
-         }
-     }
 
      async function retrieveGroups () {
         setErr("");
@@ -88,11 +79,10 @@ export default function Home () {
      return (
         <>
         <div className=""> 
-            <h1 className="text-2xl">Groups</h1>
-            {warningMessage()}
-            <div className="flex gap-2 mt-2">
-              <button className="border p-2" onClick={logOutUser}>Logout</button>
-            </div>
+
+            <Space direction="vertical" size={16}>
+    <Card title="Groups" extra={<a href="#">More</a>} style={{ }}>
+    {warningMessage()}
             <ul className="mt-4">
                 {Array.isArray(group) && group.length > 0 ? (
                     group.map((g) => (
@@ -110,6 +100,8 @@ export default function Home () {
                     <li className="text-sm text-gray-500">No groups loaded</li>
                 )}
             </ul><br></br>
+            </Card>
+            </Space>
             <ul>
                 {Array.isArray(profile) && profile.length > 0 ? (
                 profile.map((p) => (

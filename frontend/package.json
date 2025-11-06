@@ -16,6 +16,7 @@
     "@mui/icons-material": "^7.3.4",
     "@mui/material": "^7.3.4",
     "@toolpad/core": "^0.16.0",
+    "antd": "^5.28.0",
     "axios": "^1.12.2",
     "gsap": "^3.13.0",
     "prop-types": "^15.8.1",

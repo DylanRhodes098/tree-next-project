@@ -1,6 +1,9 @@
 import {useState} from "react";
 import { login as loginUser} from "../services/auth";
 import { useNavigate, Link } from "react-router-dom";
+import React from 'react';
+import { Button, Checkbox, Form, Input } from 'antd';
+import { Card, Space } from 'antd';
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -28,37 +31,73 @@ export default function Login() {
         }
       }
 
+      const onFinish = values => {
+        console.log('Success:', values);
+      };
+      const onFinishFailed = errorInfo => {
+        console.log('Failed:', errorInfo);
+      }
+
     return (
         <> 
-        <div className="h-screen w-screen flex flex-col p-1 m-1 items-center text-center">
-            <h1 className="text-2xl text-red-500 "> login </h1>
-            <form className="m-4 flex flex-col items-center border-2 rounded w-80" onSubmit={onSubmit}>
+        <div className="backGround h-screen w-screen flex flex-col items-center text-center">
+        <img className="m-4" src="/public/webspacelogo.jpeg" height="150px" width="150px"/>
+        <Space className="m-1" direction="vertical" size={20}>
+        <Card title="Login" style={{ width: 500 }}>
+            <Form
+            name="basic"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            style={{ maxWidth: 600 }}
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+            className="m-4 flex flex-col items-center" 
+            onSubmit={onSubmit}
+            >
                 <div className="p-4 flex flex-col items-center">
-            <label htmlFor="email" className="">
-            Email
-          </label>
-                <input type="text" 
-                placeholder="email"
-                value={email}
-                onChange={(e)=>
-                setEmail(e.target.value)}
-                />
+            <Form.Item
+            label="Username"
+            name="username"
+            rules={[{ required: true, message: 'Please input your username!' }]}
+            htmlFor="email" 
+            className="">
+            <Input 
+            type="text" 
+            placeholder="Email"
+            value={email}
+            onChange={(e)=>
+            setEmail(e.target.value)}
+            />
+          </Form.Item>
                 </div>
                 <div className="p-4 flex flex-col items-center">
-                <label htmlFor="password" className="">
-            Password
-          </label>
-                <input 
+                <Form.Item
+                 label="Password"
+                 name="password"
+                 rules={[{ required: true, message: 'Please input your password!' }]}
+                htmlFor="password" 
+                className="">
+        <Input.Password
                 type="password" 
-                placeholder="password"
+                placeholder="Password"
                 value={password}
                 onChange={(e)=>
                 setPassword(e.target.value)}
                 />
+                </Form.Item>
                 </div>
-                <button className="w-40 m-4 border border-black rounded-xl hover:bg-blue-200 cursor-pointer transition-all duration-300 transition-all duration-300 ease-in-out" type="submit">Submit</button>
+                
+                <Button className="w-40 m-4" 
+                type="primary" 
+                htmlType="submit">
+
+                    Submit</Button>
                 {warningMessage()}
-            </form>
+            </Form>
+        </Card>
+        </Space>
         </div>
         </> 
     )

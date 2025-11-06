@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { register as registerUser } from "../services/auth.js";
 import { useNavigate, Link } from "react-router-dom";
+import { Button, Checkbox, Form, Input } from 'antd';
+import { Card, Space } from 'antd';
+import "../styles/LoginRegister.css"
 
 export default function Register() {
   const [full_name, setFullName] = useState("");
@@ -29,9 +32,18 @@ export default function Register() {
     }
   }
 
+  const onFinish = values => {
+    console.log('Success:', values);
+  };
+  const onFinishFailed = errorInfo => {
+    console.log('Failed:', errorInfo);
+  }
+
   return (
-    <div className="h-screen w-screen flex flex-col p-1 m-1 items-center text-center">
-      <h1 className="text-3xl text-red-500">Create account</h1>
+    <div className="backGround h-screen w-screen flex flex-col items-center text-center">
+      <img className="m-4" src="/public/webspacelogo.jpeg" height="150px" width="150px"/>
+           <Space className="" direction="vertical" size={20}>
+           <Card title="Login" style={{ width: 500 }}>
 
       {/* Error message */}
       {err ? (
@@ -44,65 +56,90 @@ export default function Register() {
         </div>
       ) : null}
 
-      <form onSubmit={onSubmit} className="m-4 flex flex-col items-center border-2 rounded w-80">
+      <Form
+                  name="basic"
+                  labelCol={{ span: 8 }}
+                  wrapperCol={{ span: 16 }}
+                  style={{ maxWidth: 600 }}
+                  initialValues={{ remember: true }}
+                  onFinish={onFinish}
+                  onFinishFailed={onFinishFailed}
+                  autoComplete="off"
+      onSubmit={onSubmit} 
+      className="m-4 flex flex-col items-center">
         <div className="p-4 flex flex-col items-center">
-          <label htmlFor="full_name" className="">
-            Full Name
-          </label>
-          <input
+          <Form.Item
+          label="Username"
+          name="username"
+          rules={[{ required: true, message: 'Please input your username!' }]}
+          htmlFor="full_name" 
+          className="">
+          <Input
             id="full_name"
             placeholder="Full Name"
             value={full_name}
             onChange={(e) => setFullName(e.target.value)}
             autoComplete="name"
-            className="border-2 rounded"
+            className=""
           />
+          </Form.Item>
         </div>
 
         <div className="p-4 flex flex-col items-center">
-          <label htmlFor="email" className="">
-            Email
-          </label>
-          <input
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[{ required: true, message: 'Please input your email!' }]}
+          htmlFor="email" 
+          className="">
+          <Input
             id="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             autoComplete="email"
-            className="border-2 rounded"
+            className=""
           />
+           </Form.Item>
         </div>
 
         <div className="p-4 flex flex-col items-center">
-          <label htmlFor="password" className="">
-            Password
-          </label>
-          <input
+        <Form.Item
+          label="Password"
+          name="passworde"
+          rules={[{ required: true, message: 'Please input your password!' }]} 
+          htmlFor="password" 
+          className="">
+          <Input.Password
             id="password"
             placeholder="Password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="new-password"
-            className="border-2 rounded"
+            className=""
           />
+           </Form.Item>
         </div>
 
-        <button
-          type="submit"
-          className="w-40 m-4 border border-black rounded-xl hover:bg-blue-200 cursor-pointer transition-all duration-300 transition-all duration-300 ease-in-out"
+        <Button
+         type="primary" 
+         htmlType="submit"
+          className="w-40 m-4"
           disabled={!full_name || !email || !password}
         >
           Register
-        </button>
-      </form>
+        </Button>
+      </Form>
 
       <p className="">
         Have an account?{" "}
-        <Link to="/login" className="w-1/2 underline hover:text-blue-200 cursor-pointer transition-all duration-300 transition-all duration-300 ease-in-out">
+        <Link to="/login" className="">
           Login
         </Link>
       </p>
+         </Card>
+              </Space>
     </div>
     
   )
